@@ -1,25 +1,33 @@
 package cafe.ebs.web03.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import cafe.ebs.web03.service.SampleService;
+import cafe.ebs.web03.vo.Sample;
 
+@Controller
 public class SampleController {
 	@Autowired private SampleService sampleService;
+	
+	
 	// 1. 입력폼
-	@GetMapping("/addSample")
+	@GetMapping(value="/addSample")
 	public String addSample() {
-		
+		System.out.println("get mapping");
 		return "addSample"; // view이름은 templates폴더에 addSample.html 
-	}//Get이기 때문에 GetMapping
+	}
+	//Get이기 때문에 GetMapping
 	// 2. 입력 액션
-	@PostMapping
+	@PostMapping("/addSample")
 	public String addSample(@RequestParam(value="sampleName") String sampleName) {
-		
+		System.out.println("post mapping");
 		
 		return "redirect:/sampleList";
 	}
@@ -28,8 +36,12 @@ public class SampleController {
 	//두번째.@RequestParam이용해 request.getParameter로  sampleName을 채운다
 	
 	// 3. 목록
-	@GetMapping("/sampleList")
+	
+	@GetMapping(value="/sampleList")
 	public String sampleList(Model model) {
+		List<Sample> list = sampleService.getSampleList();
+
+		model.addAttribute("list", list);
 		return "sampleList";
 	}
 	//request.setAttribute는 model 사용

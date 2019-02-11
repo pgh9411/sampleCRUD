@@ -1,0 +1,18 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	</head>
+	<body>
+		<table border=1>
+		<tr>
+			<td>sampleId</td>
+			<td>sampleName</td>
+		</tr>
+			<tr th:each="s : ${list}">
+				<td th:text="${s.sampleId}"></td>
+				<td th:text="${s.sampleName}"></td>
+			</tr>
+		</table>
+		
+	</body>
+
+</html>
