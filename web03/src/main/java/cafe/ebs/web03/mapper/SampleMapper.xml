@@ -24,11 +24,11 @@
 	
 	
 	<delete id="deleteSample" parameterType="cafe.ebs.web03.vo.Sample">
-	
+			DELETE FROM sample WHERE sample_id=#{sampleId}
 	</delete><!-- delete 하는 쿼리  파라미터타입은 리절트타입과 같다  Sample을 받으면 id를 받기때문에 아이디 대신 vo.Sample 전체를 받는다--> 
 	
 	
 	<update id="updateSample" parameterType="cafe.ebs.web03.vo.Sample">
-	
+		UPDATE sample SET sample_name = #{sampleName} WHERE sample_id = #{sampleId} 
 	</update><!-- update 하는 쿼리  파라미터타입은 리절트타입과 같다  vo.Sample 전체를 받는다--> 
 </mapper>

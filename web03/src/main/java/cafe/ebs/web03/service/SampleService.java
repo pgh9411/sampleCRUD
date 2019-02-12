@@ -20,24 +20,30 @@ public class SampleService {
 		return list;
 	}
 
-	public List<Sample> getSampleOne() {
-
-		return null;
+	public List<Sample> getSampleOne(int sampleId) {
+		List<Sample> list = sampleMapper.selectSampleOne(sampleId);
+		return list;
 	}
 
-	public int addSample(Sample sample) {
-		
-		return 0;
+	public int addSample(String sample) {
+		int result = sampleMapper.insertSample(sample);
+		System.out.println("입력 값 :" + result);
+		//return 유무?
+		return result;
 	}
 
-	public int removeSample(Sample sample) {
-
-		return 0;
+	public int removeSample(int sampleId) {
+		int result = sampleMapper.deleteSample(sampleId);
+		System.out.println("입력 값 :" + result);
+		//return 유무?
+		return result;
 	}
 
-	public int modifySample(Sample sample) {
-
-		return 0;
-	}// 리턴값은 나중에 수정하기 , 모양만 존재
+	public int modifySample(int sampleId, String sampleName) {
+		//sampleId와 sampleName을 입력값으로 받아 수정액션을 한다
+		int result = sampleMapper.updateSample(sampleId,sampleName);
+		System.out.println(result + " : 입력 결과는?");
+		return result;
+	}// 리턴값은 나중에 수정하기 o
 
 }

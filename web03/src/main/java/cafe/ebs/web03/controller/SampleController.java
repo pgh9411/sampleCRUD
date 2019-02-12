@@ -28,7 +28,7 @@ public class SampleController {
 	@PostMapping("/addSample")
 	public String addSample(@RequestParam(value="sampleName") String sampleName) {
 		System.out.println("post mapping");
-		
+		sampleService.addSample(sampleName);
 		return "redirect:/sampleList";
 	}
 	//Post이기 때문에 PostMapping,
@@ -46,8 +46,35 @@ public class SampleController {
 	}
 	//request.setAttribute는 model 사용
 	// 4. 삭제 액션
-	
+	@GetMapping("/removeSample")
+	//get으로 받은것을 매핑해준다 
+	//애노테이션@GetMapping 안해주면? 404에러 페이지 뜬다
+	public String removeSample(@RequestParam(value="sampleId") int sampleId) {
+		sampleService.removeSample(sampleId);
+		//리턴은 String 타입, 리스트로 이동
+		return "redirect:/sampleList";
+		//삭제 액션 후 다시 리스트로 이동시킨다
+	}
 	// 5. 수정 폼
-	
+	@GetMapping("/modifySample")
+	//get으로 정보 sampleId값을 받아서 수정 폼을 출력하는 역할
+	//getSampleOne 메서드 이용해서 데이터 하나만 수정화면에 이동
+	//전달받은 sampleId를 인자로 list에 저장하여 한 객체만 세팅해준다
+	public String getSampleOne(Model model, @RequestParam(value="sampleId")int sampleId) {
+		
+		List<Sample> list = sampleService.getSampleOne(sampleId);
+		model.addAttribute("list_one", list);
+		//sampleService.getSampleOne(sampleId);
+		
+		return "modifySample";
+	}
 	// 6. 수정 액션
+	@PostMapping("/modifySample")
+	public String modifySample(@RequestParam(value="sampleName")String sampleName,@RequestParam(value="sampleId")int sampleId) {
+			
+		sampleService.modifySample(sampleId,sampleName);
+		
+		return "redirect:/sampleList";
+	}
+
 }

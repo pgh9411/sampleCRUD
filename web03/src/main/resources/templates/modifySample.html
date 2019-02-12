@@ -1,0 +1,18 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+	<form action="/modifySample" method="post">
+		<table border=1>
+			<tr th:each="s : ${list_one}">
+				<td>아이디 :<input th:value="${s.sampleId}" type="text" name="sampleId"  readonly></td> 
+				<td>이름 : <input th:value="${s.sampleName}" type="text" name="sampleName" ></td>
+				<td><input type="submit" value="수정하기"></td>
+			</tr>
+		</table>
+	</form> 
+</body> 
+</html>
+
+
+
