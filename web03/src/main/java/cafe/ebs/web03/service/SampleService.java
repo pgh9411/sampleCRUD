@@ -17,24 +17,26 @@ public class SampleService {
 
 	public List<Sample> getSampleList() {
 		List<Sample> list = sampleMapper.selectSampleList();
+		
 		return list;
 	}
 
 	public List<Sample> getSampleOne(int sampleId) {
 		List<Sample> list = sampleMapper.selectSampleOne(sampleId);
+		
 		return list;
 	}
 
-	public int addSample(String sample) {
-		int result = sampleMapper.insertSample(sample);
-		System.out.println("입력 값 :" + result);
+	public int addSample(String sampleName) {
+		int result = sampleMapper.insertSample(sampleName);
+		
 		//return 유무?
 		return result;
 	}
 
 	public int removeSample(int sampleId) {
 		int result = sampleMapper.deleteSample(sampleId);
-		System.out.println("입력 값 :" + result);
+		
 		//return 유무?
 		return result;
 	}
@@ -42,7 +44,7 @@ public class SampleService {
 	public int modifySample(int sampleId, String sampleName) {
 		//sampleId와 sampleName을 입력값으로 받아 수정액션을 한다
 		int result = sampleMapper.updateSample(sampleId,sampleName);
-		System.out.println(result + " : 입력 결과는?");
+		
 		return result;
 	}// 리턴값은 나중에 수정하기 o
 

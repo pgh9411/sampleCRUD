@@ -10,7 +10,7 @@ import cafe.ebs.web03.vo.Sample;
 public interface SampleMapper {
 	List<Sample> selectSampleList();
 	List<Sample> selectSampleOne(int sampleId);
-	int insertSample(String sample);
+	int insertSample(String sampleName);
 	int deleteSample(int sampleId);
 	int updateSample(int sampleId, String sampleName);
 

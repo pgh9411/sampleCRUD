@@ -20,15 +20,17 @@ public class SampleController {
 	// 1. 입력폼
 	@GetMapping(value="/addSample")
 	public String addSample() {
-		System.out.println("get mapping");
+		System.out.println("get mapping addSample");
+		System.out.println("입력화면 출력");
 		return "addSample"; // view이름은 templates폴더에 addSample.html 
 	}
 	//Get이기 때문에 GetMapping
 	// 2. 입력 액션
 	@PostMapping("/addSample")
 	public String addSample(@RequestParam(value="sampleName") String sampleName) {
-		System.out.println("post mapping");
+		System.out.println("post mapping addSample");
 		sampleService.addSample(sampleName);
+		System.out.println("추가한 NAME : " + sampleName);
 		return "redirect:/sampleList";
 	}
 	//Post이기 때문에 PostMapping,
@@ -39,9 +41,11 @@ public class SampleController {
 	
 	@GetMapping(value="/sampleList")
 	public String sampleList(Model model) {
+		System.out.println("get mapping sampleList");
 		List<Sample> list = sampleService.getSampleList();
 
 		model.addAttribute("list", list);
+		System.out.println("리스트 출력");
 		return "sampleList";
 	}
 	//request.setAttribute는 model 사용
@@ -50,8 +54,10 @@ public class SampleController {
 	//get으로 받은것을 매핑해준다 
 	//애노테이션@GetMapping 안해주면? 404에러 페이지 뜬다
 	public String removeSample(@RequestParam(value="sampleId") int sampleId) {
+		System.out.println("get mapping removeSample");
 		sampleService.removeSample(sampleId);
 		//리턴은 String 타입, 리스트로 이동
+		System.out.println("삭제한 ID : " + sampleId);
 		return "redirect:/sampleList";
 		//삭제 액션 후 다시 리스트로 이동시킨다
 	}
@@ -61,9 +67,10 @@ public class SampleController {
 	//getSampleOne 메서드 이용해서 데이터 하나만 수정화면에 이동
 	//전달받은 sampleId를 인자로 list에 저장하여 한 객체만 세팅해준다
 	public String getSampleOne(Model model, @RequestParam(value="sampleId")int sampleId) {
-		
+		System.out.println("get mapping getSampleOne");
 		List<Sample> list = sampleService.getSampleOne(sampleId);
 		model.addAttribute("list_one", list);
+		System.out.println("ID : "+sampleId+"  수정화면 출력");
 		//sampleService.getSampleOne(sampleId);
 		
 		return "modifySample";
@@ -71,9 +78,10 @@ public class SampleController {
 	// 6. 수정 액션
 	@PostMapping("/modifySample")
 	public String modifySample(@RequestParam(value="sampleName")String sampleName,@RequestParam(value="sampleId")int sampleId) {
-			
-		sampleService.modifySample(sampleId,sampleName);
-		
+		System.out.println("post mapping modifySample");
+		int result = sampleService.modifySample(sampleId,sampleName);
+		System.out.println("ID : "+sampleId);
+		System.out.println("수정한 NAME : "+sampleName);
 		return "redirect:/sampleList";
 	}
 
